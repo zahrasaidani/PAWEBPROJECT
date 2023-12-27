@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cours par Spécialité</title>
+    <link rel="stylesheet" href="my-courses.css" />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <nav>
+          <ul>
+            <li><a href="pro.html">Home</a></li>
+            <li><a href="#">my Courses</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="h1">
+      <h1>MY COURSES</h1>
+    </div>
+    <span class="dots" onclick="showLinks()">...</span>
+    <div class="links-popup" id="linksPopup">
+      <a href="#">Create a course</a>
+    </div>
+
+    <div class="card-body">
+      <div class="title">Course Overview</div>
+      <div class="card-texte">
+        <div class="button">
+          <select
+            class="dropbtn"
+            id="select1"
+            onchange="goToLink('select1')"
+            size="1"
+          >
+            <div class="dropdown-content">
+              <option id="All" value="#" onclick="showLesson('all')">
+                All
+              </option>
+              <option id="Pro" value="#" onclick="showLesson('pro')">
+                in progress
+              </option>
+              <option id="Past" value="#" onclick="showLesson('past')">
+                past
+              </option>
+              <option id="Fav" value="#" onclick="showLesson('fav')">
+                favority
+              </option>
+              <option id="Rem" value="#" onclick="showLesson('rem')">
+                removed from display
+              </option>
+            </div>
+          </select>
+        </div>
+        <div class="Search">
+          <div class="InputContainer">
+            <input
+              placeholder="Search for course.."
+              id="input"
+              class="input"
+              name="text"
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="sort">
+          <select
+            class="dropbtn"
+            id="select2"
+            onchange="goToLink('select2')"
+            size="1"
+          >
+            <div class="dropdown-content">
+              <option
+                id="Semester"
+                value="#"
+                onclick="afficheLesson('semester')"
+              >
+                Sort by semester
+              </option>
+              <option
+                id="Speciality"
+                value="#"
+                onclick="afficheLesson('speciality')"
+              >
+                Sort by speciality
+              </option>
+            </div>
+          </select>
+        </div>
+        <div class="summary">
+          <select
+            class="dropbtn"
+            id="select3"
+            onchange="goToLink('select3')"
+            size="1"
+          >
+            <div class="dropdown-content">
+              <option value="#" onclick="showContent('map')">Map</option>
+              <option value="#" onclick="showContent('list')">List</option>
+            </div>
+          </select>
+        </div>
+        <div id="watchedLessons">
+          <div id="mapContent" style="display: none" class="bigFrame">
+            <div id="mapImage" class="image">
+              <img id="cardImage" src="" alt="Card Image" style="width: 100%" />
+            </div>
+            <div id="mapLinks">
+              <div id="allCourses" class="courses">
+                <ul id="courseList">
+                  <!-- الروابط هنا ستمتلأ بناءً على البيانات من قاعدة البيانات -->
+                  <il><a href="#">course 1</a></il>
+                  <il><a href="#">course 2</a></il>
+                  <il><a href="#">course 3</a></il>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div id="listContent" style="display: none" class="frame">
+            <div id="listImage" class="imagel">
+              <img
+                id="cardeImage"
+                src=""
+                alt="Card Image"
+                style="width: 100%"
+              />
+            </div>
+            <div id="listLinks">
+              <div id="allCourses" class="lesson">
+                <ul id="lessonList">
+                  <!-- الروابط هنا ستمتلأ بناءً على البيانات من قاعدة البيانات -->
+                  <il><a href="#">course 1</a></il>
+                  <il><a href="#">course 2</a></il>
+                  <il><a href="#">course 3</a></il>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <p>&copy; 2023 Educational Site. All rights reserved.</p>
+    </footer>
+    <script>
+      function goToLink(selectId) {
+        var select = document.getElementById(selectId);
+        var selectedLink = select.options[select.selectedIndex].value;
+        //FI PAGE W7DO5RA
+        //window.open(selectedLink, '_blank');
+        // FI PAGE NFSH
+        Window.location.href = selectedLink;
+      }
+      //3 POINT
+      function showLinks() {
+        var linksDiv = document.getElementById("linksPopup");
+        linksDiv.style.display = "block";
+        event.stopPropagation();
+      }
+      function hideLinks(event) {
+        var linksDiv = document.getElementById("linksPopup");
+        linksDiv.style.display = "none";
+        event.stopPropagation();
+      }
+      document.addEventListener("click", function () {
+        var linksDiv = document.getElementById("linksPopup");
+        linksDiv.style.display = "none";
+      });
+      //ALL
+      function showLesson(selectedValue) {
+        document.getElementById("All").style.display = "none";
+        document.getElementById("Pro").style.display = "none";
+        document.getElementById("Past").style.display = "none";
+        document.getElementById("Fav").style.display = "none";
+        document.getElementById("Rem").style.display = "none";
+
+        if (selectedValue === "all") {
+          //3RD ALL LESSONS B RABTH M3 PHP
+          document.addEventListener("DOMContentLoaded", function () {
+            fetch("#") // BD ALL
+              .then((response) => response.json())
+              .then((data) => {
+                displayData(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching data:", error);
+              });
+
+            displayData(data);
+          });
+        } else if (selectedValue === "pro") {
+          //3RD PRO LESSONS B RABTH M3 PHP
+          document.addEventListener("DOMContentLoaded", function () {
+            fetch("#") // BD IN PROGRESS
+              .then((response) => response.json())
+              .then((data) => {
+                displayData(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching data:", error);
+              });
+
+            displayData(data);
+          });
+        } else if (selectedValue === "past") {
+          //3RD PRO LESSONS B RABTH M3 PHP
+          document.addEventListener("DOMContentLoaded", function () {
+            fetch("#") //BD PAST
+              .then((response) => response.json())
+              .then((data) => {
+                displayData(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching data:", error);
+              });
+
+            displayData(data);
+          });
+        } else if (selectedValue === "fav") {
+          //3RD PRO LESSONS B RABTH M3 PHP
+          document.addEventListener("DOMContentLoaded", function () {
+            fetch("#") //BD FAVORITES
+              .then((response) => response.json())
+              .then((data) => {
+                displayData(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching data:", error);
+              });
+            displayData(data);
+          });
+        } else if (selectedValue === "rem") {
+          //3RD PRO LESSONS B RABTH M3 PHP
+          document.addEventListener("DOMContentLoaded", function () {
+            fetch("#") //BD romoved from display
+              .then((response) => response.json())
+              .then((data) => {
+                displayData(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching data:", error);
+              });
+            displayData(data);
+          });
+        }
+      }
+      //MAP
+      function showContent(selectedValue) {
+        document.getElementById("mapContent").style.display = "none";
+        document.getElementById("listContent").style.display = "none";
+        if (selectedValue === "map") {
+          document.addEventListener("DOMContentLoaded", function () {
+            fetch("#") // LINK BD
+              .then((response) => response.json())
+              .then((DATA) => {
+                DisplayData(DATA);
+              })
+              .catch((error) => {
+                console.error("Error fetching data:", error);
+              });
+
+            function DisplayData(DATA) {
+              const gridContainer = document.getElementById("watchedLesson");
+              const mapContainer = document.getElementById("mapContent");
+
+              data.forEach((item) => {
+                const mapItem = document.createElement("img");
+                mapItem.src = item.image;
+
+                const map1Item = document.createElement("a");
+                map1Item.href = item.link;
+                mapContainer.appendChild(mapItem);
+
+                mapContainer.appendChild(map1Item);
+              });
+              gridContainer.appendChild(mapContainer);
+            }
+          });
+        } else if (selectedValue === "list") {
+          document.addEventListener("DOMContentLoaded", function () {
+            fetch("#") //LINK BD
+              .then((response) => response.json())
+              .then((DATA1) => {
+                DisplayData1(DATA1);
+              })
+              .catch((error) => {
+                console.error("Error fetching data:", error);
+              });
+
+            function DisplayData1(DATA1) {
+              const gridContainer = document.getElementById("watchedLesson");
+              const listContainer = document.getElementById("listContent");
+
+              data.forEach((item) => {
+                const listItem = document.createElement("img");
+                listItem.src = item.image;
+
+                const list1Item = document.createElement("a");
+                list1Item.href = item.link;
+                listContainer.appendChild(listItem);
+
+                listContainer.appendChild(list1Item);
+              });
+              gridContainer.appendChild(listContainer);
+            }
+          });
+        }
+      }
+      // sort
+      function afficheLesson(selectedValue) {
+        document.getElementById("Semester").style.display = "none";
+        document.getElementById("Speciality").style.display = "none";
+        if (selectedValue === speciality) {
+          function sortBySpeciality() {
+            const sortedData = data
+              .slice()
+              .sort((a, b) => a.speciality.localeCompare(b.speciality));
+            displayData(sortedData);
+          }
+        }
+
+        if (selectedValue === semester) {
+          // الفرز حسب 'semester'
+          function sortBySemester() {
+            const sortedData = data
+              .slice()
+              .sort((a, b) => a.semester - b.semester);
+            displayData(sortedData);
+          }
+        }
+      }
+      function displayData(Data) {
+        const gridContainer = document.getElementById("watchedLesson");
+        const mapContainer = document.getElementById("mapContent");
+        const listContainer = document.getElementById("listContent");
+
+        data.forEach((item) => {
+          const mapItem = document.createElement("img");
+          mapItem.src = item.image;
+
+          const map1Item = document.createElement("a");
+          map1Item.href = item.link;
+          mapContainer.appendChild(mapItem);
+
+          mapContainer.appendChild(map1Item);
+
+          const listItem = document.createElement("img");
+          listItem.src = item.image;
+
+          const list1Item = document.createElement("a");
+          list1Item.href = item.link;
+          listContainer.appendChild(listItem);
+
+          listContainer.appendChild(list1Item);
+        });
+        gridContainer.appendChild(mapContainer);
+        gridContainer.appendChild(listContainer);
+      }
+    </script>
+    <script>
+      function getModulesByFilter() {
+          var selectElement = document.getElementById('select2');
+          var selectedValue = selectElement.options[selectElement.selectedIndex].value;
+  
+          // Vérifiez si l'option sélectionnée est "Sort by speciality"
+          if (selectedValue == "Public_cible") {
+              // Récupérez la spécialité sélectionnée
+              var Public_cible = prompt("Enter the speciality:");
+  
+              // Envoyez une requête AJAX pour récupérer les modules triés par spécialité
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function () {
+                  if (this.readyState == 4 && this.status == 200) {
+                      // Affichez les résultats dans la section dédiée
+                      document.getElementById("moduleResults").innerHTML = this.responseText;
+                  }
+              };
+              xhttp.open("GET", "sort_modules_by_speciality.php?speciality=" + Public_cible, true);
+              xhttp.send();
+          }
+      }
+  </script>
+  
+  </body>
+</html>
